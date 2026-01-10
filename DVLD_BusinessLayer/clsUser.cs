@@ -7,8 +7,8 @@ namespace DVLD_BusinessLayer
     public class clsUser
     {
 
-        enum enMode { AddNew = 0, Update = 1 }
-        enMode Mode;
+        public enum enMode { AddNew = 0, Update = 1 }
+        public enMode Mode;
 
         public int UserID { get; set; }
         public int PersonID { get; set; }

@@ -123,5 +123,42 @@ namespace DVLD_DataAccess
 
         }
 
+        public static decimal GetFees(byte ApplicationTypeID)
+        {
+
+            decimal fees = 0;
+
+            SqlConnection connection =
+                new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = @"SELECT ApplicationFees 
+                     FROM ApplicationTypes
+                     WHERE ApplicationTypeID = @ApplicationTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && decimal.TryParse(result.ToString(), out decimal value))
+                    fees = value;
+            }
+            catch (Exception)
+            {
+                // handle or log exception if needed
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return fees;
+        }
+
+
     }
 }

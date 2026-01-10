@@ -119,7 +119,7 @@
             // 
             // editApplicationTypeToolStripMenuItem
             // 
-            this.editApplicationTypeToolStripMenuItem.Image = global::DVLD.Properties.Resources.EditApplicationType3;
+            this.editApplicationTypeToolStripMenuItem.Image = global::DVLD.Properties.Resources.EditApplicationType;
             this.editApplicationTypeToolStripMenuItem.Name = "editApplicationTypeToolStripMenuItem";
             this.editApplicationTypeToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.editApplicationTypeToolStripMenuItem.Text = "Edit Application Type";

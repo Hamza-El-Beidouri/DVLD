@@ -112,7 +112,7 @@ namespace DVLD
             if (_Person.ImagePath != "")
             {
                 llRemoveImage.Visible = true;
-                pbPersonImage.Load(_Person.ImagePath);
+                pbPersonImage.ImageLocation = _Person.ImagePath;
             }
 
             cbCountries.SelectedIndex = cbCountries.FindString(clsCountry.Find(_Person.NationalityCountryID).CountryName);
@@ -153,10 +153,7 @@ namespace DVLD
             RadioButton gender = (RadioButton)sender;
             enGender Gender = (enGender)gender.Tag;
 
-            if (Gender == enGender.Male)
-                pbPersonImage.Image = Resources.Male;
-            else
-                pbPersonImage.Image = Resources.Female;
+            pbPersonImage.Image = (Gender == enGender.Male) ? Resources.Male : Resources.Female;
 
         }
 
@@ -374,6 +371,17 @@ namespace DVLD
         private void btnSave_Click(object sender, EventArgs e)
         {
 
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show(
+                                "Unable to add the person. Please make sure all required fields are filled in correctly.",
+                                "Validation Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                                );
+                return;
+            }
+
             if (!_HandlePersonImage())
                 return;
 
@@ -389,8 +397,10 @@ namespace DVLD
             _Person.Gender = (rbMale.Checked) ? (byte)enGender.Male : (byte)enGender.Female;
             _Person.DateOfBirth = dtpDateOfBirth.Value;
             
-
             _Person.NationalityCountryID = clsCountry.Find(cbCountries.Text).CountryID;
+
+            if (pbPersonImage.ImageLocation == null)
+                _Person.ImagePath = "";
 
             if (_Person.Save())
             {              

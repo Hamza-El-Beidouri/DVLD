@@ -31,7 +31,6 @@ namespace DVLD.People.Controls
 
         public void ResetPersonInfo()
         {
-
             _PersonID = -1;
             lblPersonID.Text = "[????]";
             lblNationalNo.Text = "[????]";
@@ -44,7 +43,7 @@ namespace DVLD.People.Controls
             lblCountry.Text = "[????]";
             lblAddress.Text = "[????]";
             pbPersonImage.Image = Resources.Male;
-
+            btnEdit.Enabled = false;
         }
 
         private void _LoadPersonImage()

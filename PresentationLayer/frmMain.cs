@@ -13,6 +13,7 @@ using DVLD.Global_Classes;
 using DVLD.Login;
 using DVLD.Application_Types;
 using DVLD.TestTypes;
+using DVLD.Applications.Local_Driving_License;
 
 namespace DVLD
 {
@@ -80,5 +81,16 @@ namespace DVLD
             frm.ShowDialog();
         }
 
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUpdateLocalDrivingLicenseApplication frm = new frmAddUpdateLocalDrivingLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicenseApplications frm = new frmListLocalDrivingLicenseApplications();
+            frm.ShowDialog();
+        }
     }
 }

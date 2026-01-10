@@ -53,17 +53,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application Types\frmEditApplicationType.cs">
+    <Compile Include="Applications\Application Types\frmEditApplicationType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Application Types\frmEditApplicationType.Designer.cs">
+    <Compile Include="Applications\Application Types\frmEditApplicationType.Designer.cs">
       <DependentUpon>frmEditApplicationType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Application Types\frmListApplicationTypes.cs">
+    <Compile Include="Applications\Application Types\frmListApplicationTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Application Types\frmListApplicationTypes.Designer.cs">
+    <Compile Include="Applications\Application Types\frmListApplicationTypes.Designer.cs">
       <DependentUpon>frmListApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving License\frmAddUpdateLocalDrivingLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving License\frmAddUpdateLocalDrivingLicenseApplication.Designer.cs">
+      <DependentUpon>frmAddUpdateLocalDrivingLicenseApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplications.Designer.cs">
+      <DependentUpon>frmListLocalDrivingLicenseApplications.cs</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Global Classes\clsUtils.cs" />
@@ -112,6 +124,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TestTypes\frmEditTestType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,11 +171,17 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Application Types\frmEditApplicationType.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmEditApplicationType.resx">
       <DependentUpon>frmEditApplicationType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Application Types\frmListApplicationTypes.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmListApplicationTypes.resx">
       <DependentUpon>frmListApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving License\frmAddUpdateLocalDrivingLicenseApplication.resx">
+      <DependentUpon>frmAddUpdateLocalDrivingLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplications.resx">
+      <DependentUpon>frmListLocalDrivingLicenseApplications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -211,11 +234,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -349,21 +367,6 @@
     <None Include="Resources\ManageTestTypes.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\EditApplicationType.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EditApplicationType1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EditApplicationType2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EditApplicationType3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EditApplicationType4.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\EditTestType.png" />
   </ItemGroup>
   <ItemGroup>
@@ -382,10 +385,46 @@
     <None Include="Resources\RetakeTest.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\InternationalDrivingLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LicenseClasses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fees.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditApplicationType.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\LocalDrivingLicense.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\InternationalDrivingLicense.png" />
+    <None Include="Resources\ApplicationDetails.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditApplication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteApplication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CancelApplication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IssueDrivingLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShowLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShowPersonLicenseHistory.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

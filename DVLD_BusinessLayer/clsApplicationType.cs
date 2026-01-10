@@ -53,5 +53,10 @@ namespace DVLD_BusinessLayer
             return _UpdateApplicationType();
         }
 
+        public static decimal GetFees(byte ApplicationTypeID)
+        {
+            return clsApplicationTypeData.GetFees(ApplicationTypeID);
+        }
+
     }
 }

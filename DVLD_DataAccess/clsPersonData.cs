@@ -406,7 +406,7 @@ namespace DVLD_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
 
-            string query = "SELECT * FROM People_View ORDER BY FirstName";
+            string query = "SELECT * FROM People_View ORDER BY FirstName;";
 
             SqlCommand command = new SqlCommand(query , connection);
 
