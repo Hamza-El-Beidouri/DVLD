@@ -35,7 +35,7 @@ namespace DVLD_BusinessLayer
 
         private clsLocalDrivingLicenseApplication(int localDrivingLicenseApplicationID,
                                           int applicationID, int applicantPersonID,
-                                          DateTime applicationDate, sbyte applicationTypeID,
+                                          DateTime applicationDate, int applicationTypeID,
                                           enApplicationStatus applicationStatus,
                                           DateTime lastStatusDate, decimal paidFees,
                                           int createdByUserID, int licenseClassID)
@@ -168,8 +168,8 @@ namespace DVLD_BusinessLayer
                 }
 
             }
-            else
-                return false;
+
+            return false;
 
         }
 
@@ -181,6 +181,88 @@ namespace DVLD_BusinessLayer
         public static bool GetApplicationID(int LocalDrivingLicenseApplicationID, ref int ApplicationID)
         {
             return clsLocalDrivingLicenseApplicationData.GetApplicationID(LocalDrivingLicenseApplicationID, ref ApplicationID);
+        }
+
+        public static int GetPassedTestsCount(int LocalDrivingLicenseApplicationID)
+        {
+            return clsLocalDrivingLicenseApplicationData.GetPassedTestsCount
+                (LocalDrivingLicenseApplicationID);
+        }
+
+        public int GetPassedTestsCount()
+        {
+            return clsLocalDrivingLicenseApplicationData.GetPassedTestsCount
+                (this.LocalDrivingLicenseApplicationID);
+        }
+
+        public bool IsTestPassed(clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationData.IsTestPassed(this.LocalDrivingLicenseApplicationID, (byte)TestType);
+        }
+
+        public static bool IsTestPassed(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationData.IsTestPassed(LocalDrivingLicenseApplicationID, (byte)TestType);
+        }
+
+        public static bool HasActiveTestAppointment(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationData.HasActiveTestAppointment(LocalDrivingLicenseApplicationID, (byte)TestType);
+        }
+
+        public static int GetFailedTrialsCount(int localDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationData.GetFailedTrialsCount(localDrivingLicenseApplicationID, (byte)TestType);
+        }
+
+        public bool HasFailedTestType(clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationData.HasFailedTestType(this.LocalDrivingLicenseApplicationID, (byte)TestType);
+        }
+
+        public int IssueDrivingLicenseForTheFirstTime(string Notes, int CreatedByUserID)
+        {
+
+            int LicenseID = -1;
+
+            // We check first if an existing driver record exists for this person
+            clsDriver driver = clsDriver.FindByPersonID(this.ApplicantPersonID);
+
+            if (driver == null)
+            {
+                driver = new clsDriver();
+
+                driver.PersonID = this.ApplicantPersonID;
+                driver.CreatedByUserID = CreatedByUserID;
+                driver.CreatedDate = DateTime.Now;
+
+                if (!driver.Save())
+                    return -1;
+
+            }
+
+
+            clsLicense License = new clsLicense();
+
+            License.ApplicationID = this.ApplicationID;
+            License.DriverID = driver.DriverID;
+            License.LicenseClassID = this.LicenseClassID;
+            License.IssueDate = DateTime.Now;
+            License.ExpirationDate = License.IssueDate.AddYears(this.LicenseClassInfo.DefaultValidityLength);
+            License.Notes = Notes;
+            License.PaidFees = this.LicenseClassInfo.ClassFees;
+            License.IsActive = true;
+            License.IssueReason = clsLicense.enIssueReason.FirstTime;
+            License.CreatedByUserID = CreatedByUserID;
+
+            if (License.Save())
+                {
+                    this.SetComplete();
+                    LicenseID = License.LicenseID;
+                }
+
+            return LicenseID;
+
         }
 
     }

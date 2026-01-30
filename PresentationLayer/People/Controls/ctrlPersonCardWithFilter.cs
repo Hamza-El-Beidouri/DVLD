@@ -85,6 +85,13 @@ namespace DVLD.People.Controls
 
         }
 
+        public void LoadPersonInfo(string nationalNo)
+        {
+            cbFilterBy.SelectedIndex = 0;
+            txtFilterValue.Text = nationalNo;
+            _FindPerson();
+        }
+
         public void LoadPersonInfo(int personID)
         {
             cbFilterBy.SelectedIndex = 1;

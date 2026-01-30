@@ -74,7 +74,7 @@ namespace DVLD.Applications.Local_Driving_License
                 cbLicenseClasses.FindString
                 (clsLicenseClass.Find((sbyte)clsLicenseClass.enLicenseClass.OrdinaryDrivingLicense).ClassName);
 
-            lblFees.Text = clsApplicationType.GetFees((byte)clsApplication.enApplicationType.NewDrivingLicense).ToString();
+            lblFees.Text = clsApplicationType.GetFees(clsApplication.enApplicationType.NewDrivingLicense).ToString();
             lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
 
         }
@@ -153,10 +153,10 @@ namespace DVLD.Applications.Local_Driving_License
 
             _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
 
-            _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
+            _LocalDrivingLicenseApplication.LastStatusDate = _LocalDrivingLicenseApplication.ApplicationDate;
 
             _LocalDrivingLicenseApplication.PaidFees =
-                clsApplicationType.GetFees((byte)clsApplication.enApplicationType.NewDrivingLicense);
+                clsApplicationType.GetFees(clsApplication.enApplicationType.NewDrivingLicense);
 
             _LocalDrivingLicenseApplication.CreatedByUserID = clsGlobal.CurrentUser.UserID;
 
@@ -172,7 +172,7 @@ namespace DVLD.Applications.Local_Driving_License
 
             int ActiveApplicationID = 
                 clsApplication.GetActiveApplicationIdByLicenseClass(
-                                                                    ctrlPersonCardWithFilter1.personID,
+                                                                    _LocalDrivingLicenseApplication.ApplicantPersonID,
                                                                     clsApplication.enApplicationType.NewDrivingLicense,
                                                                     _LocalDrivingLicenseApplication.LicenseClassID
                                                                     );
@@ -180,29 +180,39 @@ namespace DVLD.Applications.Local_Driving_License
             if (ActiveApplicationID == -1)
             {
 
-                if (_LocalDrivingLicenseApplication.Save())
-                {
-                    this.Text = "Update Local Driving License Application";
-                    lblLocalDrivingLicenseApplication.Text = this.Text;
-                    lblLicenseApplicationID.Text =
-                        _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+                bool isFound = clsLicense.IsLicenseExist(_LocalDrivingLicenseApplication.ApplicantPersonID, _LocalDrivingLicenseApplication.LicenseClassID);
 
-                    MessageBox.Show(
-                                    "The local driving license application was saved successfully.",
-                                    "Success",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information
-                                    );
+                if (!isFound)
+                {
+                    if (_LocalDrivingLicenseApplication.Save())
+                    {
+                        this.Text = "Update Local Driving License Application";
+                        lblLocalDrivingLicenseApplication.Text = this.Text;
+                        lblLicenseApplicationID.Text =
+                            _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+                        Mode = enMode.Update;
+                        MessageBox.Show(
+                                        "The local driving license application was saved successfully.",
+                                        "Success",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information
+                                        );
+                    }
+                    else
+                        MessageBox.Show(
+                                        "Failed to save the local driving license application. Please try again.",
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error
+                                        );
                 }
                 else
-                {
                     MessageBox.Show(
-                                    "Failed to save the local driving license application. Please try again.",
-                                    "Error",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error
-                                    );
-                }
+                    "This person already has an active license for the selected license class.",
+                    "License Already Exists",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                    );
 
             }
             else
@@ -212,8 +222,6 @@ namespace DVLD.Applications.Local_Driving_License
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning
                                 );
-
-
 
         }
     }

@@ -58,5 +58,10 @@ namespace DVLD_BusinessLayer
             return clsTestTypeData.GetAllTestTypes();
         }
 
+        public static decimal GetTestTypeFees(enTestType testType)
+        {
+            return clsTestTypeData.GetTestTypeFees((byte)testType);
+        }
+
     }
 }

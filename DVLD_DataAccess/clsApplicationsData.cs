@@ -9,7 +9,7 @@ namespace DVLD_DataAccess
     {
 
         public static bool GetApplicationByID(int ApplicationID, ref int ApplicantPersonID, 
-                                                ref DateTime ApplicationDate, ref sbyte ApplicationTypeID, 
+                                                ref DateTime ApplicationDate, ref int ApplicationTypeID, 
                                                 ref byte ApplicationStatus, ref DateTime LastStatusDate, 
                                                 ref decimal PaidFees, ref int CreatedByUserID)
         {
@@ -35,7 +35,7 @@ namespace DVLD_DataAccess
                     isFound = true;
                     ApplicantPersonID = (int)reader["ApplicantPersonID"];
                     ApplicationDate = (DateTime)reader["ApplicationDate"];
-                    ApplicationTypeID = (sbyte)reader["ApplicationTypeID"];
+                    ApplicationTypeID = (int)reader["ApplicationTypeID"];
                     ApplicationStatus = (byte)reader["ApplicationStatus"];
                     LastStatusDate = (DateTime)reader["LastStatusDate"];
                     PaidFees = (decimal)reader["PaidFees"];
@@ -411,6 +411,47 @@ namespace DVLD_DataAccess
             }
 
             return (rowsAffected > 0);
+
+        }
+
+        public static DataTable GetAllInternationalLicensesApplications()
+        {
+
+            DataTable dtInternationalLicenseApplications = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = @"
+                            SELECT InternationalLicenseID, Applications.ApplicationID,
+		                    IssuedUsingLocalLicenseID As LocalLicenseID,
+		                    IssueDate, ExpirationDate, IsActive
+                            FROM InternationalLicenses
+                            INNER JOIN Applications
+                            ON InternationalLicenses.ApplicationID = Applications.ApplicationID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                    dtInternationalLicenseApplications.Load(reader);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dtInternationalLicenseApplications;
 
         }
 

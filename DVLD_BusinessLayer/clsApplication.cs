@@ -20,9 +20,9 @@ namespace DVLD_BusinessLayer
 
         public int ApplicationID { get; set; }
         public int ApplicantPersonID { get; set; }
-        public clsPerson PersonInfo;
+        public clsPerson ApplicantInfo;
         public DateTime ApplicationDate { get; set; }
-        public sbyte ApplicationTypeID { get; set; }
+        public int ApplicationTypeID { get; set; }
         public clsApplicationType ApplicationTypeInfo;
         public enApplicationStatus ApplicationStatus {  get; set; }
         public string StatusText
@@ -33,10 +33,13 @@ namespace DVLD_BusinessLayer
                 {
                     case enApplicationStatus.New:
                         return "New";
+
                     case enApplicationStatus.Cancelled:
                         return "Cancelled";
+
                     case enApplicationStatus.Completed:
                         return "Completed";
+
                     default:
                         return "Unkown";
                 }
@@ -70,7 +73,7 @@ namespace DVLD_BusinessLayer
         {
             this.ApplicationID = -1;
             this.ApplicantPersonID = -1;
-            this.PersonInfo = new clsPerson();
+            this.ApplicantInfo = new clsPerson();
             this.ApplicationDate = DateTime.Now;
             this.ApplicationTypeID = -1;
             this.ApplicationTypeInfo = new clsApplicationType();
@@ -83,13 +86,13 @@ namespace DVLD_BusinessLayer
         }
 
         protected clsApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate,
-                                sbyte ApplicationTypeID, enApplicationStatus ApplicationStatus,
+                                int ApplicationTypeID, enApplicationStatus ApplicationStatus,
                                 DateTime LastStatusDate,
                                 decimal PaidFees, int CreatedByUserID)
         {
             this.ApplicationID = ApplicationID;
             this.ApplicantPersonID = ApplicantPersonID;
-            this.PersonInfo = clsPerson.Find(this.ApplicantPersonID);
+            this.ApplicantInfo = clsPerson.Find(this.ApplicantPersonID);
             this.ApplicationDate = ApplicationDate;
             this.ApplicationTypeID = ApplicationTypeID;
             this.ApplicationTypeInfo = clsApplicationType.Find(ApplicationTypeID);
@@ -97,15 +100,14 @@ namespace DVLD_BusinessLayer
             this.LastStatusDate = LastStatusDate;
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUserInfo = clsUser.FindByPersonID(ApplicantPersonID);
+            this.CreatedByUserInfo = clsUser.FindByPersonID(this.CreatedByUserID);
             this.Mode = enMode.Update;
         }
 
         public static clsApplication FindBaseApplication(int ApplicationID)
         {
 
-            int ApplicantPersonID = -1, CreatedByUserID = -1;
-            sbyte ApplicationTypeID = -1;
+            int ApplicantPersonID = -1, CreatedByUserID = -1, ApplicationTypeID = -1;
             byte ApplicationStatus = 1;
             DateTime ApplicationDate = DateTime.Now, LastStatusDate = DateTime.Now;
             decimal PaidFees = 0;
@@ -146,6 +148,12 @@ namespace DVLD_BusinessLayer
         {
             return clsApplicationsData.UpdateStatus(ApplicationID, 
                (byte)enApplicationStatus.Cancelled);
+        }
+
+        public bool SetComplete()
+        {
+            return clsApplicationsData.UpdateStatus(this.ApplicationID, 
+                (byte)enApplicationStatus.Completed);
         }
 
         public static bool SetComplete(int ApplicationID)
@@ -192,6 +200,11 @@ namespace DVLD_BusinessLayer
         public static int GetActiveApplicationIdByLicenseClass(int PersonID, enApplicationType ApplicationType, int LicenseClassID)
         {
             return clsApplicationsData.GetActiveApplicationIdByLicenseClass(PersonID, (int)ApplicationType, LicenseClassID);
+        }
+
+        public static DataTable GetAllInternationalLicenseApplications()
+        {
+            return clsApplicationsData.GetAllInternationalLicensesApplications();
         }
 
     }

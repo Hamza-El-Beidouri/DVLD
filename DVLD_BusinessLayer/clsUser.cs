@@ -79,13 +79,14 @@ namespace DVLD_BusinessLayer
 
         }
 
-        public static clsUser Find(string UserName, string Password)
+        public static clsUser Find(string UserName)
         {
 
+            string Password = "";
             int UserD = -1, PersonID = -1;
             bool IsActive = false;
 
-            if (clsUserData.GetUserByUserNameAndPassword(UserName, Password, 
+            if (clsUserData.GetUserByUserName(UserName, ref Password, 
                             ref UserD, ref PersonID, ref IsActive))
                 return new clsUser(UserD, PersonID, UserName, Password, IsActive);
             else
@@ -146,11 +147,6 @@ namespace DVLD_BusinessLayer
         public static bool IsUserExist(string UserName)
         {
             return clsUserData.IsUserExist(UserName);
-        }
-
-        public static bool IsUserExist(string UserName, string Password)
-        {
-            return clsUserData.IsUserExist(UserName, Password);
         }
 
     }

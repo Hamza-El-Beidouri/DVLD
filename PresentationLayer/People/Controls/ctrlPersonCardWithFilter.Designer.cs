@@ -48,9 +48,10 @@
             this.gbPersonFilter.Controls.Add(this.txtFilterValue);
             this.gbPersonFilter.Controls.Add(this.cbFilterBy);
             this.gbPersonFilter.Controls.Add(this.label1);
+            this.gbPersonFilter.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(103)))), ((int)(((byte)(178)))));
             this.gbPersonFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbPersonFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbPersonFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.gbPersonFilter.ForeColor = System.Drawing.Color.White;
             this.gbPersonFilter.Location = new System.Drawing.Point(0, 0);
             this.gbPersonFilter.Name = "gbPersonFilter";
             this.gbPersonFilter.Size = new System.Drawing.Size(1104, 147);
@@ -134,6 +135,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.label1.Location = new System.Drawing.Point(3, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 32);

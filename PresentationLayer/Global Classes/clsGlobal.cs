@@ -12,13 +12,41 @@ namespace DVLD.Global_Classes
     {
 
         public static clsUser CurrentUser = new clsUser();
+        private const string CredentialsFileName = "Credentials.txt";
+        private static byte _EncryptionKey = 2;
+
+        private static string _EncryptText(string text)
+        {
+
+            char[] chars = text.ToCharArray();
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                chars[i] = (char)((int)chars[i] + _EncryptionKey);
+            }
+
+            return new string(chars);
+
+        }
+
+        private static string _DecryptText(string encryptedText)
+        {
+            char[] chars = encryptedText.ToCharArray();
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                chars[i] = (char)(chars[i] - _EncryptionKey);
+            }
+
+            return new string(chars);
+        }
 
         public static bool RememberUserNameAndPassword(string userName, string password)
         {
             try
             {
                 string filePath = Path.Combine(
-                                       Directory.GetCurrentDirectory(), "Credentials.txt"
+                                       Directory.GetCurrentDirectory(), CredentialsFileName
                                                );
 
                 if (string.IsNullOrWhiteSpace(userName))
@@ -29,7 +57,7 @@ namespace DVLD.Global_Classes
                     return true;
                 }
 
-                string content = $"{userName}#//#{password}";
+                string content = $"{_EncryptText(userName)}#//#{_EncryptText(password)}";
                 File.WriteAllText(filePath, content);
 
                 return true;
@@ -47,7 +75,7 @@ namespace DVLD.Global_Classes
             password = string.Empty;
 
             string filePath = Path.Combine(
-                                       Directory.GetCurrentDirectory(), "Credentials.txt"
+                                       Directory.GetCurrentDirectory(), CredentialsFileName
                                                );
 
             try
@@ -62,8 +90,8 @@ namespace DVLD.Global_Classes
                 if (index == -1)
                     return false;
 
-                userName = data.Substring(0, index);
-                password = data.Substring(index + delimiter.Length);
+                userName = _DecryptText(data.Substring(0, index));
+                password = _DecryptText(data.Substring(index + delimiter.Length));
 
                 return true;
             }

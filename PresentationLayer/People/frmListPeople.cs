@@ -280,7 +280,7 @@ namespace DVLD
 
         private void tmsAddNewPerson_Click(object sender, EventArgs e)
         {
-            Form frm1 = new frmAddUpdatePerson();
+            frmAddUpdatePerson frm1 = new frmAddUpdatePerson();
             frm1.ShowDialog();
             _RefreshPeopleList();
         }

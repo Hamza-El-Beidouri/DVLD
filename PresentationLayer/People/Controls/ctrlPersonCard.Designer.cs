@@ -100,9 +100,10 @@
             this.guna2GroupBox1.Controls.Add(this.label3);
             this.guna2GroupBox1.Controls.Add(this.label2);
             this.guna2GroupBox1.Controls.Add(this.label1);
+            this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(103)))), ((int)(((byte)(178)))));
             this.guna2GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2GroupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.guna2GroupBox1.ForeColor = System.Drawing.Color.White;
             this.guna2GroupBox1.Location = new System.Drawing.Point(0, 0);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
             this.guna2GroupBox1.Size = new System.Drawing.Size(1067, 315);
@@ -227,6 +228,7 @@
             // lblCountry
             // 
             this.lblCountry.AutoSize = true;
+            this.lblCountry.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblCountry.Location = new System.Drawing.Point(579, 223);
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(52, 30);
@@ -236,6 +238,7 @@
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
+            this.lblPhone.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblPhone.Location = new System.Drawing.Point(577, 184);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(52, 30);
@@ -245,6 +248,7 @@
             // lblBirthDate
             // 
             this.lblBirthDate.AutoSize = true;
+            this.lblBirthDate.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblBirthDate.Location = new System.Drawing.Point(626, 143);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(52, 30);
@@ -284,6 +288,7 @@
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
+            this.lblAddress.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblAddress.Location = new System.Drawing.Point(131, 263);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(52, 30);
@@ -293,6 +298,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
+            this.lblEmail.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblEmail.Location = new System.Drawing.Point(117, 227);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(52, 30);
@@ -302,6 +308,7 @@
             // lblGender
             // 
             this.lblGender.AutoSize = true;
+            this.lblGender.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblGender.Location = new System.Drawing.Point(131, 182);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(52, 30);
@@ -311,6 +318,7 @@
             // lblNationalNo
             // 
             this.lblNationalNo.AutoSize = true;
+            this.lblNationalNo.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblNationalNo.Location = new System.Drawing.Point(165, 143);
             this.lblNationalNo.Name = "lblNationalNo";
             this.lblNationalNo.Size = new System.Drawing.Size(52, 30);
@@ -320,6 +328,7 @@
             // lblFullName
             // 
             this.lblFullName.AutoSize = true;
+            this.lblFullName.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblFullName.Location = new System.Drawing.Point(151, 102);
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(52, 30);
@@ -329,6 +338,7 @@
             // lblPersonID
             // 
             this.lblPersonID.AutoSize = true;
+            this.lblPersonID.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblPersonID.Location = new System.Drawing.Point(156, 60);
             this.lblPersonID.Name = "lblPersonID";
             this.lblPersonID.Size = new System.Drawing.Size(52, 30);

@@ -122,5 +122,38 @@ namespace DVLD_DataAccess
 
         }
 
+        public static decimal GetTestTypeFees(byte TestTypeID)
+        {
+            decimal Fees = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = "SELECT TestTypeFees FROM TestTypes WHERE TestTypeID = @TestTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                // Check if the result is not null before casting
+                if (result != null && decimal.TryParse(result.ToString(), out decimal extractedFees))
+                    Fees = extractedFees;
+            }
+            catch (Exception ex)
+            {
+                // Log error if needed
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return Fees;
+        }
+
     }
 }

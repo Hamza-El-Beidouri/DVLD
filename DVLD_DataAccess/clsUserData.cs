@@ -101,7 +101,7 @@ namespace DVLD_DataAccess
 
         }
 
-        public static bool GetUserByUserNameAndPassword(string UserName, string Password, 
+        public static bool GetUserByUserName(string UserName, ref string Password, 
                                                         ref int UserID, ref int PersonID, 
                                                         ref bool IsActive
                                                         )
@@ -111,11 +111,10 @@ namespace DVLD_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
 
-            string query = "SELECT * FROM Users WHERE UserName = @UserName AND Password = @Password;";
+            string query = "SELECT * FROM Users WHERE UserName = @UserName;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@UserName", UserName);
-            command.Parameters.AddWithValue("@Password", Password);
 
             try
             {
@@ -129,6 +128,7 @@ namespace DVLD_DataAccess
                     isFound = true;
 
                     UserID = (int)reader["UserID"];
+                    Password = (string)reader["Password"];
                     PersonID = (int)reader["PersonID"];
                     IsActive = (bool)reader["IsActive"];
 
@@ -355,42 +355,6 @@ namespace DVLD_DataAccess
 
                 connection.Open();
 
-                object result = command.ExecuteScalar();
-
-                if (result != null)
-                    isFound = true;
-
-            }
-            catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isFound;
-
-        }
-
-        public static bool IsUserExist(string UserName, string Password)
-        {
-
-            bool isFound = false;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
-
-            string query = "SELECT Found = 1 FROM Users WHERE UserName = @UserName AND Password = @Password;";
-
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@UserName", UserName);
-            command.Parameters.AddWithValue("@Password", Password);
-
-            try
-            {
-
-                connection.Open();
                 object result = command.ExecuteScalar();
 
                 if (result != null)

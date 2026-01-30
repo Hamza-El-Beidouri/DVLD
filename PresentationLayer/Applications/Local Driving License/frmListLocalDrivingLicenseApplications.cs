@@ -1,4 +1,6 @@
-﻿using DVLD_BusinessLayer;
+﻿using DVLD.Licenses.Local_Licenses;
+using DVLD.TestAppointments;
+using DVLD_BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -108,6 +110,7 @@ namespace DVLD.Applications.Local_Driving_License
             cbFilterBy.Items.Add("National No");
             cbFilterBy.Items.Add("Full Name");
             cbFilterBy.Items.Add("Status");
+            cbFilterBy.SelectedIndex = 0;
         }
 
         private void frmListLocalDrivingLicenseApplications_Load(object sender, EventArgs e)
@@ -214,14 +217,12 @@ namespace DVLD.Applications.Local_Driving_License
                     else
                         MessageBox.Show("Failed to cancel the application.", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
                 }
-                else
-                    MessageBox.Show("Could not find the associated Application ID for this record.", "Not Found",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
+            else
+                MessageBox.Show("Could not find the associated Application ID for this record.", "Not Found",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
 
@@ -282,6 +283,137 @@ namespace DVLD.Applications.Local_Driving_License
             }
         }
 
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmLocalDrivingLicenseInfo frm = new frmLocalDrivingLicenseInfo(LocalAppID);
+            frm.ShowDialog();
+            _RefreshGridData();
+        }
+
+        private void _SetAllMenuItemsEnabled(bool enabled)
+        {
+            editApplicationToolStripMenuItem.Enabled = enabled;
+            deleteApplicationToolStripMenuItem.Enabled = enabled;
+            cancelApplicationToolStripMenuItem.Enabled = enabled;
+            scheduleTestsToolStripMenuItem.Enabled = enabled;
+            issueDrivingLicenseToolStripMenuItem.Enabled = enabled;
+            showLicenseToolStripMenuItem.Enabled = enabled;
+        }
+
+        private void cmsLocalLicenseApp_Opening(object sender, CancelEventArgs e)
+        {
+            var row = dgvLocalDrivingLicenseApplications.CurrentRow;
+
+            if (row == null)
+                return;
+
+            byte passedTests = Convert.ToByte(row.Cells[5].Value);
+            string status = row.Cells[6].Value.ToString();
+
+            bool isNew = status == "New";
+            bool isCompleted = status == "Completed";
+            bool isCancelled = status == "Cancelled";
+
+            // Disable everything first (single repaint logic)
+            _SetAllMenuItemsEnabled(false);
+
+            // Always allowed unless completed/cancelled
+            editApplicationToolStripMenuItem.Enabled = isNew;
+            deleteApplicationToolStripMenuItem.Enabled = isNew;
+            cancelApplicationToolStripMenuItem.Enabled = isNew;
+
+            // Scheduling & issuing logic
+            scheduleTestsToolStripMenuItem.Enabled = isNew && passedTests < 3;
+            issueDrivingLicenseToolStripMenuItem.Enabled = isNew && passedTests == 3;
+
+            // Show license only when completed
+            showLicenseToolStripMenuItem.Enabled = isCompleted;
+        }
+
+        private void scheduleTestsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+
+            int ApplicationID = Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            bool isVisionTestPassed = clsLocalDrivingLicenseApplication.IsTestPassed(ApplicationID, clsTestType.enTestType.VisionTest);
+            bool isTheoryTestPassed = clsLocalDrivingLicenseApplication.IsTestPassed(ApplicationID, clsTestType.enTestType.WrittenTest);
+            bool isPracticalTestPassed = clsLocalDrivingLicenseApplication.IsTestPassed(ApplicationID, clsTestType.enTestType.StreetTest);
+
+            visionTestToolStripMenuItem.Enabled = !isVisionTestPassed;
+            theoryTestToolStripMenuItem.Enabled = isVisionTestPassed && !isTheoryTestPassed;
+            practicalTestToolStripMenuItem.Enabled = isTheoryTestPassed && !isPracticalTestPassed;
+
+        }
+
+        private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmListTestAppointments frm = new frmListTestAppointments(LocalAppID, clsTestType.enTestType.VisionTest);
+            frm.ShowDialog();
+            _RefreshGridData();
+        }
+
+        private void theoryTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmListTestAppointments frm = new frmListTestAppointments(LocalAppID, clsTestType.enTestType.WrittenTest);
+            frm.ShowDialog();
+            _RefreshGridData();
+        }
+
+        private void practicalTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmListTestAppointments frm = new frmListTestAppointments(LocalAppID, clsTestType.enTestType.StreetTest);
+            frm.ShowDialog();
+            _RefreshGridData();
+        }
+
+        private void issueDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmIssueDrivingLicenseFirstTime frm = new frmIssueDrivingLicenseFirstTime(LocalAppID);
+            frm.ShowDialog();
+            _RefreshGridData();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            int LicenseID = clsLicense.FindByApplicationID(clsLocalDrivingLicenseApplication.Find(LocalAppID).ApplicationID).LicenseID;
+
+            frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+            frm.ShowDialog();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            int LocalAppID =
+                Convert.ToInt32(dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+
+            frmShowPersonLicenseHistory frm =
+                new frmShowPersonLicenseHistory(clsLocalDrivingLicenseApplication.Find(LocalAppID).ApplicantPersonID);
+            
+            frm.ShowDialog();
+
+        }
     }
     
 }

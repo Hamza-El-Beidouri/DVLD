@@ -26,10 +26,10 @@ namespace DVLD.Login
             string UserName = txtUserName.Text;
             string Password = txtPassword.Text;
 
-            if (clsUser.IsUserExist(UserName, Password))
+            if (clsUser.IsUserExist(UserName))
             {
 
-                clsUser User = clsUser.Find(UserName, Password);
+                clsUser User = clsUser.Find(UserName);
 
                 if (User.IsActive)
                 {
@@ -57,13 +57,11 @@ namespace DVLD.Login
 
             }
             else
-            {
                 MessageBox.Show("Invalid username or password. Please check your credentials and try again.",
                                 "Login Failed",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error
                                 );
-            }
 
         }
 

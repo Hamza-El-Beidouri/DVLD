@@ -14,6 +14,8 @@ using DVLD.Login;
 using DVLD.Application_Types;
 using DVLD.TestTypes;
 using DVLD.Applications.Local_Driving_License;
+using DVLD.Drivers;
+using DVLD.Applications.International_Licenses;
 
 namespace DVLD
 {
@@ -90,6 +92,24 @@ namespace DVLD
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListLocalDrivingLicenseApplications frm = new frmListLocalDrivingLicenseApplications();
+            frm.ShowDialog();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDrivers frm = new frmListDrivers();
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInternationalLicenseApplication frm = new frmInternationalLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListInternationalLicenseApplications frm = new frmListInternationalLicenseApplications();
             frm.ShowDialog();
         }
     }
