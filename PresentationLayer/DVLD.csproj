@@ -95,6 +95,12 @@
     <Compile Include="Applications\Local Driving License\frmLocalDrivingLicenseInfo.Designer.cs">
       <DependentUpon>frmLocalDrivingLicenseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Renew License\frmRenewLocalDrivingLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Renew License\frmRenewLocalDrivingLicense.Designer.cs">
+      <DependentUpon>frmRenewLocalDrivingLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Drivers\frmListDrivers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License\frmLocalDrivingLicenseInfo.resx">
       <DependentUpon>frmLocalDrivingLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Renew License\frmRenewLocalDrivingLicense.resx">
+      <DependentUpon>frmRenewLocalDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Drivers\frmListDrivers.resx">
       <DependentUpon>frmListDrivers.cs</DependentUpon>

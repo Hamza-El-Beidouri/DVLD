@@ -396,6 +396,123 @@ namespace DVLD_DataAccess
             return dtLicenses;
         }
 
+        public static bool IsLicenseExpired(int LicenseID)
+        {
+
+            bool IsLicenseExpired = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = @"SELECT isExpired = 1 FROM Licenses
+                            WHERE LicenseID = @LicenseID
+                            AND
+	                        ExpirationDate < GETDATE();";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                    IsLicenseExpired = true;
+
+            }
+            catch (SqlException ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsLicenseExpired;
+
+        }
+
+        public static bool HasDriverRenewedLicense(int DriverID, int LicenseClassID)
+        {
+
+            bool isRenewed = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = @"SELECT TOP 1 1 AS isRenewed
+                             FROM Licenses
+                             WHERE DriverID = @DriverID
+                             AND LicenseClass = @LicenseClass
+                             AND IsActive = 1
+                             AND IssueReason IN (2, 3, 4);";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@DriverID", DriverID);
+            command.Parameters.AddWithValue("@LicenseClass", LicenseClassID);
+
+            try
+            {
+
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                isRenewed = (result != null);
+
+            }
+            catch (SqlException ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isRenewed;
+
+        }
+
+        public static bool DeactivateLicense(int LicenseID)
+        {
+            bool isDeactivated = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString);
+
+            string query = @"UPDATE Licenses
+                     SET IsActive = 0
+                     WHERE LicenseID = @LicenseID
+                     AND IsActive = 1;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                isDeactivated = (rowsAffected > 0);
+            }
+            catch (SqlException ex)
+            {
+                // You can log ex.Message here if needed
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isDeactivated;
+        }
+
 
     }
 }

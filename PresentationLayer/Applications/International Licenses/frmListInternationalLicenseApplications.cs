@@ -165,10 +165,7 @@ namespace DVLD.Applications.International_Licenses
                 txtFilterValue.Focus();
             }
             else
-            {
-                _dtInternationalLicenseApplications.DefaultView.RowFilter = "";
                 lblFilteredRecordsCount.Text = "0 Record(s)";
-            }
 
         }
 
@@ -213,22 +210,25 @@ namespace DVLD.Applications.International_Licenses
         private void cbActiveStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            string filterColumn = "IsActive";
+            bool activeStatus = false;
 
             switch (cbActiveStatus.Text)
             {
                 case "Yes":
-                    _dtInternationalLicenseApplications.DefaultView.RowFilter = $"[{filterColumn}] = true";
+                    activeStatus = true;
                     break;
 
                 case "No":
-                    _dtInternationalLicenseApplications.DefaultView.RowFilter = $"[{filterColumn}] = false";
+                    activeStatus = false;
                     break;
 
                 default: // All
                     _dtInternationalLicenseApplications.DefaultView.RowFilter = string.Empty;
-                    break;
+                    lblFilteredRecordsCount.Text = "0 Record(s)";
+                    return;
             }
+
+            _dtInternationalLicenseApplications.DefaultView.RowFilter = $"[IsActive] = {activeStatus}";
 
             lblFilteredRecordsCount.Text =
                 $"{_dtInternationalLicenseApplications.DefaultView.Count} Record(s)";

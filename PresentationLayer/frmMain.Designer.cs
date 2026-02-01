@@ -135,20 +135,20 @@
             // 
             this.localLicenseToolStripMenuItem.Image = global::DVLD.Properties.Resources.LocalDrivingLicense;
             this.localLicenseToolStripMenuItem.Name = "localLicenseToolStripMenuItem";
-            this.localLicenseToolStripMenuItem.Size = new System.Drawing.Size(227, 38);
+            this.localLicenseToolStripMenuItem.Size = new System.Drawing.Size(211, 24);
             this.localLicenseToolStripMenuItem.Text = "Local License";
             this.localLicenseToolStripMenuItem.Click += new System.EventHandler(this.localLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(224, 6);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(208, 6);
             // 
             // internationalLicenseToolStripMenuItem
             // 
             this.internationalLicenseToolStripMenuItem.Image = global::DVLD.Properties.Resources.InternationalDrivingLicense;
             this.internationalLicenseToolStripMenuItem.Name = "internationalLicenseToolStripMenuItem";
-            this.internationalLicenseToolStripMenuItem.Size = new System.Drawing.Size(227, 38);
+            this.internationalLicenseToolStripMenuItem.Size = new System.Drawing.Size(211, 24);
             this.internationalLicenseToolStripMenuItem.Text = "International License";
             this.internationalLicenseToolStripMenuItem.Click += new System.EventHandler(this.internationalLicenseToolStripMenuItem_Click);
             // 
@@ -163,6 +163,7 @@
             this.renewDrivingLicenseToolStripMenuItem.Name = "renewDrivingLicenseToolStripMenuItem";
             this.renewDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(374, 38);
             this.renewDrivingLicenseToolStripMenuItem.Text = "Renew Driving License";
+            this.renewDrivingLicenseToolStripMenuItem.Click += new System.EventHandler(this.renewDrivingLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem7
             // 
