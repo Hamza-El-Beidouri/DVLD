@@ -185,7 +185,9 @@ Each issued license includes:
 
 ---
 
-## 🔁 Additional Services
+## 🧑‍💼 System Administration
+
+The system provides administrative tools to manage users, people, applications, and system settings.
 
 ---
 
@@ -226,6 +228,8 @@ Each issued license includes:
 ---
 
 ## 🧑‍💼 System Administration
+
+The system provides administrative tools to manage users, people, applications, and system settings.
 
 ---
 
