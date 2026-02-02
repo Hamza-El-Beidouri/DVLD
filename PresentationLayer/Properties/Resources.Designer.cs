@@ -353,6 +353,16 @@ namespace DVLD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LockLicense {
+            get {
+                object obj = ResourceManager.GetObject("LockLicense", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Login_Image {
             get {
                 object obj = ResourceManager.GetObject("Login_Image", resourceCulture);
@@ -386,6 +396,16 @@ namespace DVLD.Properties {
         internal static System.Drawing.Bitmap ManageApplicationsTypes {
             get {
                 object obj = ResourceManager.GetObject("ManageApplicationsTypes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ManageDetainedLicenses {
+            get {
+                object obj = ResourceManager.GetObject("ManageDetainedLicenses", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -486,6 +506,16 @@ namespace DVLD.Properties {
         internal static System.Drawing.Bitmap PhoneCall {
             get {
                 object obj = ResourceManager.GetObject("PhoneCall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReleaseDetainedLicense {
+            get {
+                object obj = ResourceManager.GetObject("ReleaseDetainedLicense", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

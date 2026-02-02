@@ -18,6 +18,7 @@ namespace DVLD.Applications.Renew_License
 
         private int _LicenseID = -1;
         private clsLicense _OldLicense = null;
+        private clsLicense _NewLicense = null;
 
         public frmRenewLocalDrivingLicense()
         {
@@ -96,7 +97,7 @@ namespace DVLD.Applications.Renew_License
 
         private void llShowLicensesInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmShowLicenseInfo frm = new frmShowLicenseInfo(_LicenseID);
+            frmShowLicenseInfo frm = new frmShowLicenseInfo(_NewLicense.LicenseID);
             frm.ShowDialog();
         }
 
@@ -149,7 +150,6 @@ namespace DVLD.Applications.Renew_License
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
 
-                _OldLicense.IsActive = false;
 
                 if (!_OldLicense.DeactivateLicense())
                 {
@@ -175,9 +175,9 @@ namespace DVLD.Applications.Renew_License
                     return;
                 }
 
-                clsLicense NewLicense = _CreateNewLicense(application.ApplicationID);
+                _NewLicense = _CreateNewLicense(application.ApplicationID);
 
-                if (!NewLicense.Save())
+                if (!_NewLicense.Save())
                 {
                     MessageBox.Show(
                                     "Failed to save the new license.\n\nPlease try again or contact support if the problem persists.",
@@ -190,11 +190,11 @@ namespace DVLD.Applications.Renew_License
                 }
 
                 lblRenewLicenseApplicationID.Text = application.ApplicationID.ToString();
-                lblRenewedLicenseID.Text = NewLicense.LicenseID.ToString();
+                lblRenewedLicenseID.Text = _NewLicense.LicenseID.ToString();
                 llShowLicensesInfo.Enabled = true;
 
                 MessageBox.Show(
-                                $"License renewed successfully with ID = {NewLicense.LicenseID}",
+                                $"License renewed successfully with ID = {_NewLicense.LicenseID}",
                                 "Renewal Successful",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information

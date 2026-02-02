@@ -316,7 +316,8 @@ namespace DVLD_DataAccess
                             IssuedUsingLocalLicenseID AS LocalLicenseID,
                             IssueDate, ExpirationDate, IsActive
                      FROM InternationalLicenses
-                     WHERE DriverID = @DriverID;";
+                     WHERE DriverID = @DriverID
+                     ORDER BY InternationalLicenses.IssueDate DESC;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DriverID", DriverID);

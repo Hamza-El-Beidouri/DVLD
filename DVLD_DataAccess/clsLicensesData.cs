@@ -368,7 +368,8 @@ namespace DVLD_DataAccess
                      FROM Licenses
                      INNER JOIN LicenseClasses
                         ON Licenses.LicenseClass = LicenseClasses.LicenseClassID
-                     WHERE Licenses.DriverID = @DriverID;";
+                     WHERE Licenses.DriverID = @DriverID
+                     ORDER BY Licenses.IssueDate DESC;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DriverID", DriverID);

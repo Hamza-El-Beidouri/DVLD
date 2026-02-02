@@ -77,18 +77,18 @@
             this.tcUserDetails.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
             this.tcUserDetails.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
             this.tcUserDetails.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
-            this.tcUserDetails.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
+            this.tcUserDetails.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(103)))), ((int)(((byte)(178)))));
             this.tcUserDetails.TabButtonIdleState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tcUserDetails.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
-            this.tcUserDetails.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.tcUserDetails.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty;
-            this.tcUserDetails.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(37)))), ((int)(((byte)(49)))));
+            this.tcUserDetails.TabButtonIdleState.ForeColor = System.Drawing.Color.White;
+            this.tcUserDetails.TabButtonIdleState.InnerColor = System.Drawing.Color.Transparent;
+            this.tcUserDetails.TabButtonSelectedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(103)))), ((int)(((byte)(178)))));
+            this.tcUserDetails.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(123)))), ((int)(((byte)(198)))));
             this.tcUserDetails.TabButtonSelectedState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.tcUserDetails.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
-            this.tcUserDetails.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(132)))), ((int)(((byte)(255)))));
+            this.tcUserDetails.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.tcUserDetails.TabButtonSize = new System.Drawing.Size(180, 40);
             this.tcUserDetails.TabIndex = 0;
-            this.tcUserDetails.TabMenuBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
+            this.tcUserDetails.TabMenuBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(103)))), ((int)(((byte)(178)))));
             // 
             // tpPersonalInfo
             // 
@@ -104,8 +104,10 @@
             // ctrlPersonCardWithFilter1
             // 
             this.ctrlPersonCardWithFilter1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlPersonCardWithFilter1.FilterEnabled = true;
             this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(3, 3);
             this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
+            this.ctrlPersonCardWithFilter1.ShowAddPerson = true;
             this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(1138, 467);
             this.ctrlPersonCardWithFilter1.TabIndex = 0;
             // 

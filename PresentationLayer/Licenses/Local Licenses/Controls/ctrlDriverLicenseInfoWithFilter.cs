@@ -37,6 +37,18 @@ namespace DVLD.Licenses.Local_Licenses.Controls
             }
         }
 
+        private int _LicenseID = -1;
+
+        public int LicenseID
+        {
+            get { return _LicenseID; }
+            set
+            {
+                _LicenseID = value;
+                txtLicenseID.Text = _LicenseID.ToString();
+            }
+        }
+
         public ctrlDriverLicenseInfoWithFilter()
         {
             InitializeComponent();
@@ -72,5 +84,16 @@ namespace DVLD.Licenses.Local_Licenses.Controls
                 OnLicenseSelected(LicenseID);
 
         }
+
+        public void LoadDriverLicenseInfo()
+        {
+
+            ctrlDriverLicenseInfo1.LoadDriverLicenseInfo(_LicenseID);
+
+            if (LicenseSelected != null && ctrlDriverLicenseInfo1.isLicenseFound)
+                OnLicenseSelected(LicenseID);
+
+        }
+
     }
 }

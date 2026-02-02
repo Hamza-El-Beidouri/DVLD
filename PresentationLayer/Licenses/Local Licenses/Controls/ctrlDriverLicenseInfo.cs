@@ -76,7 +76,7 @@ namespace DVLD.Licenses.Local_Licenses
             lblBirthDate.Text = _License.ApplicationInfo.ApplicantInfo.DateOfBirth.ToShortDateString();
             lblDriverID.Text = _License.DriverID.ToString();
             lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
-            lblIsDetained.Text = (_License.IsLicenseDetained()) ? "Yes" : "No";
+            lblIsDetained.Text = (clsDetainedLicense.IsLicenseDetained(_License.LicenseID)) ? "Yes" : "No";
             _HandleApplicantImage();
         }
 
