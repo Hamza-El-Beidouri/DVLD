@@ -53,9 +53,9 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -111,9 +111,9 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -159,9 +159,9 @@ namespace DVLD_DataAccess
                 if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     DetainID = insertedID;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // log if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -205,9 +205,9 @@ namespace DVLD_DataAccess
 
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // log if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -237,8 +237,9 @@ namespace DVLD_DataAccess
 
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -273,9 +274,9 @@ namespace DVLD_DataAccess
 
                 isDetained = (result != null);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                isDetained = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -309,9 +310,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dt = null;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

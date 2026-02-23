@@ -45,7 +45,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -92,6 +92,7 @@ namespace DVLD_DataAccess
             catch (Exception ex)
             {
                 // log exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -131,7 +132,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception e)
             {
-
+                clsExceptionLogger.LogException(e);
             }
             finally
             {
@@ -177,6 +178,7 @@ namespace DVLD_DataAccess
             catch (Exception ex)
             {
                 // log exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -221,7 +223,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-                // log exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -256,9 +258,9 @@ namespace DVLD_DataAccess
                     isFound = true;
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -295,7 +297,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-                // log exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -337,7 +339,7 @@ namespace DVLD_DataAccess
 
             catch (Exception ex)
             {
-                // Console.WriteLine("Error: " + ex.Message);
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -381,7 +383,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -422,9 +424,9 @@ namespace DVLD_DataAccess
                 isFound = (result != null);
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

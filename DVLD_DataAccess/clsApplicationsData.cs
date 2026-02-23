@@ -47,7 +47,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -114,7 +114,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -167,7 +167,7 @@ namespace DVLD_DataAccess
             }
             catch (SqlException ex)
             {
-                
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -197,7 +197,7 @@ namespace DVLD_DataAccess
             }
             catch (SqlException ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -234,7 +234,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -269,7 +269,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -308,9 +308,9 @@ namespace DVLD_DataAccess
 
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -362,9 +362,9 @@ namespace DVLD_DataAccess
                     ActiveApplicationID = activeApplicationID;
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -401,9 +401,9 @@ namespace DVLD_DataAccess
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -444,7 +444,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

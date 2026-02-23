@@ -47,6 +47,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsTestAppointmentsData.GetTestAppointmentByID"));
             }
             finally
             {
@@ -98,9 +99,10 @@ namespace DVLD_DataAccess
                     if (result != null && int.TryParse(result.ToString(), out int id))
                         TestAppointmentID = id;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     // handle exception if needed
+                    clsExceptionLogger.LogException(ex);
                 }
                 finally
                 {
@@ -159,6 +161,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsTestAppointmentsData.Update/Delete/GetTestAppointments"));
             }
             finally
             {
@@ -188,6 +191,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsTestAppointmentsData.DeleteTestAppointment"));
             }
             finally
             {

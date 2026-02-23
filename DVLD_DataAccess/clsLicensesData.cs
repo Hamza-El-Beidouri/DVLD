@@ -46,9 +46,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -99,6 +100,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 isFound = false;
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.GetLicenseByApplicationID"));
             }
             finally
             {
@@ -153,6 +155,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.AddNewLicense"));
             }
             finally
             {
@@ -212,6 +215,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.UpdateLicense"));
             }
             finally
             {
@@ -240,6 +244,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.DeleteLicense"));
             }
             finally
             {
@@ -271,6 +276,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.IsLicenseExist"));
             }
             finally
             {
@@ -309,6 +315,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.IsLicenseExist(PersonID, LicenseClassID)"));
             }
             finally
             {
@@ -346,6 +353,7 @@ namespace DVLD_DataAccess
             catch (Exception ex)
             {
                 // Optional: Log exception
+                clsExceptionLogger.LogException(ex);
                 IsDetained = false;
             }
             finally
@@ -388,6 +396,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 dtLicenses = null;
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsLicensesData.GetLicensesByDriverID"));
             }
             finally
             {
@@ -426,7 +435,7 @@ namespace DVLD_DataAccess
             }
             catch (SqlException ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -505,6 +514,7 @@ namespace DVLD_DataAccess
             catch (SqlException ex)
             {
                 // You can log ex.Message here if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

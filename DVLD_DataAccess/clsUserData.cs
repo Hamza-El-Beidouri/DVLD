@@ -43,7 +43,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -90,7 +90,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -139,7 +139,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -183,7 +183,7 @@ namespace DVLD_DataAccess
             }
             catch(Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -225,7 +225,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -291,7 +291,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception e)
             {
-
+                clsExceptionLogger.LogException(e);
             }
             finally
             {
@@ -327,7 +327,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception e)
             {
-
+                clsExceptionLogger.LogException(e);
             }
             finally
             {
@@ -363,7 +363,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception e)
             {
-
+                clsExceptionLogger.LogException(e);
             }
             finally
             {

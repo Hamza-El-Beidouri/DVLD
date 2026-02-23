@@ -38,9 +38,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -90,6 +91,7 @@ namespace DVLD_DataAccess
             catch (Exception)
             {
                 // handle exception if needed
+                clsExceptionLogger.LogException(new Exception("An error occurred in clsTestsData.Add/Update/Delete/GetAll"));
             }
             finally
             {
@@ -137,9 +139,9 @@ namespace DVLD_DataAccess
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // handle exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -166,9 +168,9 @@ namespace DVLD_DataAccess
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // handle exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -198,9 +200,9 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // handle exception if needed
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

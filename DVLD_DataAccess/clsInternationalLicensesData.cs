@@ -43,9 +43,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -92,9 +93,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -144,9 +146,10 @@ namespace DVLD_DataAccess
                 if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     InternationalLicenseID = insertedID;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // optional logging
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -195,9 +198,10 @@ namespace DVLD_DataAccess
 
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // optional logging
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -225,9 +229,10 @@ namespace DVLD_DataAccess
 
                 rowsAffected = command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // optional logging
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -259,9 +264,10 @@ namespace DVLD_DataAccess
                 if (result != null)
                     isFound = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 isFound = false;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -333,9 +339,10 @@ namespace DVLD_DataAccess
 
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 dtInternationalLicenses = null;
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {

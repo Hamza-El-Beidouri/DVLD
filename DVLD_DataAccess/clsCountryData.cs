@@ -41,7 +41,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -81,7 +81,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
@@ -118,7 +118,7 @@ namespace DVLD_DataAccess
             }
             catch (Exception ex)
             {
-
+                clsExceptionLogger.LogException(ex);
             }
             finally
             {
