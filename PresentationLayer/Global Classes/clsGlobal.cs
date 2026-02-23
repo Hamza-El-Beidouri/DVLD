@@ -1,16 +1,13 @@
 ﻿using DVLD_BusinessLayer;
+using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Text;
 
 namespace DVLD.Global_Classes
 {
     public static class clsGlobal
     {
         public static clsUser CurrentUser = new clsUser();
-        private const string CredentialsFileName = "Credentials.json";
         private static byte _EncryptionKey = 2;
 
         private static string _EncryptText(string text)
@@ -33,88 +30,56 @@ namespace DVLD.Global_Classes
             return new string(chars);
         }
 
-        [DataContract]
-        private class clsCredentials
+        public static bool RememberUserNameAndPassword(string username, string password)
         {
-            [DataMember]
-            public string UserName { get; set; }
 
-            [DataMember]
-            public string Password { get; set; }
-        }
+            const string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLD";
 
-        public static bool RememberUserNameAndPassword(string userName, string password)
-        {
             try
             {
-                string filePath = Path.Combine(
-                    Directory.GetCurrentDirectory(), CredentialsFileName
-                );
 
-                if (string.IsNullOrWhiteSpace(userName))
-                {
-                    if (File.Exists(filePath))
-                        File.Delete(filePath);
-                    return true;
-                }
+                Registry.SetValue(keyPath, "Username", username, RegistryValueKind.String);
 
-                clsCredentials credentials = new clsCredentials
-                {
-                    UserName = _EncryptText(userName),
-                    Password = _EncryptText(password)
-                };
-
-                DataContractJsonSerializer serializer =
-                    new DataContractJsonSerializer(typeof(clsCredentials));
-
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    serializer.WriteObject(stream, credentials);
-                    string jsonString = Encoding.UTF8.GetString(stream.ToArray());
-                    File.WriteAllText(filePath, jsonString);
-                }
+                // TODO: Encrypt this password before saving!
+                Registry.SetValue(keyPath, "Password", _EncryptText(password), RegistryValueKind.String);
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // In a real app, you might want to log the error here
                 return false;
             }
         }
 
         public static bool GetStoredCredentials(ref string userName, ref string password)
         {
+            // Initialize parameters to empty to ensure a clean state
             userName = string.Empty;
             password = string.Empty;
 
-            string filePath = Path.Combine(
-                Directory.GetCurrentDirectory(), CredentialsFileName
-            );
+            string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLD";
 
             try
             {
-                if (!File.Exists(filePath))
+                // Registry.GetValue returns null if the key or value doesn't exist
+                object storedUser = Registry.GetValue(keyPath, "Username", null);
+                object storedPass = Registry.GetValue(keyPath, "Password", null);
+
+                if (storedUser == null || storedPass == null)
                     return false;
 
-                DataContractJsonSerializer serializer =
-                    new DataContractJsonSerializer(typeof(clsCredentials));
-
-                using (FileStream stream = new FileStream(filePath, FileMode.Open))
-                {
-                    clsCredentials credentials = (clsCredentials)serializer.ReadObject(stream);
-                    if (credentials == null)
-                        return false;
-
-                    userName = _DecryptText(credentials.UserName);
-                    password = _DecryptText(credentials.Password);
-                }
+                userName = storedUser.ToString();
+                password = _DecryptText(storedPass.ToString());
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // If the registry is inaccessible or another error occurs
                 return false;
             }
         }
     }
+
 }
