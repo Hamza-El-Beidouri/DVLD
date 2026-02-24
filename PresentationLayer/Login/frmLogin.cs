@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DVLD_BusinessLayer;
 using DVLD.Global_Classes;
 using System.IO;
+using DVLD_BusinessLayer.Utils;
 
 namespace DVLD.Login
 {
@@ -25,8 +26,9 @@ namespace DVLD.Login
 
             string UserName = txtUserName.Text;
             string Password = txtPassword.Text;
+            string HashedPassword = clsSecurityUtil.ComputeHash(Password);
 
-            if (clsUser.IsUserExist(UserName))
+            if (clsUser.IsUserExist(UserName, HashedPassword))
             {
 
                 clsUser User = clsUser.Find(UserName);

@@ -1,6 +1,7 @@
 ﻿using DVLD.People.Controls;
 using DVLD.Users.Controls;
 using DVLD_BusinessLayer;
+using DVLD_BusinessLayer.Utils;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -128,7 +129,8 @@ namespace DVLD.Users
                 return;
             }
 
-            if (_user.ChangePassword(txtNewPassword.Text))
+            string hashedNewPassword = clsSecurityUtil.ComputeHash(txtNewPassword.Text.Trim());
+            if (_user.ChangePassword(hashedNewPassword))
                 MessageBox.Show(
                                  "Your password has been successfully updated.",
                                  "Success",

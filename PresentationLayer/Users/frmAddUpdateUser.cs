@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD.People.Controls;
 using DVLD_BusinessLayer;
+using DVLD_BusinessLayer.Utils;
 using Guna.UI2.WinForms;
 
 namespace DVLD.Users
@@ -220,7 +221,7 @@ namespace DVLD.Users
 
             _user.PersonID = ctrlPersonCardWithFilter1.personID;
             _user.UserName = txtUserName.Text;
-            _user.Password = txtPassword.Text;
+            _user.Password = clsSecurityUtil.ComputeHash(txtPassword.Text.Trim());
             _user.IsActive = (chkIsActive.Checked);
 
             if (_user.Save())
