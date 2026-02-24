@@ -388,7 +388,7 @@ namespace DVLD_DataAccess
                     isFound = true;
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 clsExceptionLogger.LogException(ex);
             }

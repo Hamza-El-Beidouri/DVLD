@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,14 +11,15 @@ namespace DVLD_DataAccess
     public static class clsExceptionLogger
     {
 
-        public static void LogException(Exception e)
+        public static void LogException(Exception ex)
         {
-            string SourceName = "DVLD";
+            
+            string sourceName = "DVLD";
 
-            if (!EventLog.SourceExists(SourceName))
-                EventLog.CreateEventSource(SourceName, "Application");
+            if (!EventLog.SourceExists(sourceName))
+                EventLog.CreateEventSource(sourceName, "Application");
 
-            EventLog.WriteEntry(SourceName, e.Message, EventLogEntryType.Error);
+            EventLog.WriteEntry(sourceName, ex.Message, EventLogEntryType.Error);
 
         }
 
